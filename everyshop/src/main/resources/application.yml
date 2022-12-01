@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
+    cache: false
+  # Database
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    platform: postgres
+    username: postgres
+    password: kim12345
+  # jpa properties
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+      format_sql: true
+      default_batch_fetch_size: 100
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
