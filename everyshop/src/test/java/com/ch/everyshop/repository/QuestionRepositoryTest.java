@@ -16,10 +16,10 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 
-public class QuestionrepositoryTest {
+public class QuestionRepositoryTest {
 
     @Autowired
-    private Questionrepository questionRepository;
+    private QuestionRepository questionRepository;
 
     @Test
     public void 값_들어가는지_확인() {

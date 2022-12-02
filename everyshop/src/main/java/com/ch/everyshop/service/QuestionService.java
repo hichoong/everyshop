@@ -2,7 +2,7 @@ package com.ch.everyshop.service;
 
 import com.ch.everyshop.domain.Question;
 import com.ch.everyshop.exception.DataNotFoundException;
-import com.ch.everyshop.repository.Questionrepository;
+import com.ch.everyshop.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class QuestionService {
-    private final Questionrepository questionRepository;
+    private final QuestionRepository questionRepository;
 
     public List<Question> getList() {
         return this.questionRepository.findAll();

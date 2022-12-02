@@ -1,7 +1,6 @@
 package com.ch.everyshop.controller;
 
 import com.ch.everyshop.domain.Question;
-import com.ch.everyshop.repository.Questionrepository;
 import com.ch.everyshop.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
