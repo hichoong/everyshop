@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,10 +16,10 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 
-public class QuestionrepositoyTest {
+public class QuestionrepositoryTest {
 
     @Autowired
-    private Questionrepositoy questionRepository;
+    private Questionrepository questionRepository;
 
     @Test
     public void 값_들어가는지_확인() {
