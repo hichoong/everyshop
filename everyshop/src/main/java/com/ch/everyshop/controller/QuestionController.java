@@ -1,14 +1,16 @@
 package com.ch.everyshop.controller;
 
+import com.ch.everyshop.domain.AnswerForm;
 import com.ch.everyshop.domain.Question;
+import com.ch.everyshop.domain.QuestionForm;
 import com.ch.everyshop.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -19,7 +21,7 @@ public class QuestionController {
 
     private final QuestionService questionService;
 
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public String getQuestionList(Model model) {
         List<Question> questionList = questionService.getList();
         model.addAttribute("questionList", questionList);
@@ -27,9 +29,23 @@ public class QuestionController {
     }
 
     @GetMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Long id) {
+    public String showQuestionDetail(Model model, @PathVariable("id") Long id, AnswerForm answerForm) {
         Question question = questionService.getQuestion(id);
         model.addAttribute("question", question);
         return "question_detail";
+    }
+
+    @GetMapping("/create")
+    public String questionCreate(QuestionForm questionForm) {
+        return "question_form";
+    }
+
+    @PostMapping("/create")
+    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "question_form";
+        }
+        questionService.createQuestion(questionForm.getSubject(), questionForm.getContent());
+        return "redirect:/question/list"; // 질문 저장후 질문목록으로 이동
     }
 }
