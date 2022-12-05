@@ -1,6 +1,7 @@
 package com.ch.everyshop.repository;
 
 import com.ch.everyshop.domain.Question;
+import com.ch.everyshop.service.QuestionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,12 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 
-public class QuestionRepositoryTest {
+public class QuestionTest {
 
     @Autowired
     private QuestionRepository questionRepository;
+    @Autowired
+    private QuestionService questionService;
 
     @Test
     public void 값_들어가는지_확인() {
@@ -78,4 +81,15 @@ public class QuestionRepositoryTest {
         this.questionRepository.delete(q);
         assertEquals(1, this.questionRepository.count());
     }
+
+    @Test
+    public void 페이징을_위한_데이터() {
+        for (int i = 1; i <= 300; i++) {
+            String subject = String.format("테스트 데이터입니다:[%03d]", i);
+            String content = "내용무";
+            this.questionService.createQuestion(subject, content);
+        }
+    }
+
+
 }

@@ -5,6 +5,7 @@ import com.ch.everyshop.domain.Question;
 import com.ch.everyshop.domain.QuestionForm;
 import com.ch.everyshop.service.QuestionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,10 +22,10 @@ public class QuestionController {
 
     private final QuestionService questionService;
 
-    @GetMapping("/list")
-    public String getQuestionList(Model model) {
-        List<Question> questionList = questionService.getList();
-        model.addAttribute("questionList", questionList);
+    @RequestMapping("/list")
+    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+        Page<Question> paging = questionService.getQuestionList(page);
+        model.addAttribute("paging", paging);
         return "question_list";
     }
 

@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class AnswerRepositoryTest {
+public class AnswerTest {
     @Autowired
     private QuestionRepository questionRepository;
     @Autowired
