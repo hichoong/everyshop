@@ -26,4 +26,7 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) //질문이 삭제되면, 글에 달려있던 답변 삭제
     private List<Answer> answerList;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private SiteUser author;
 }

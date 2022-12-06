@@ -1,6 +1,7 @@
 package com.ch.everyshop.service;
 
 import com.ch.everyshop.domain.Question;
+import com.ch.everyshop.domain.SiteUser;
 import com.ch.everyshop.exception.DataNotFoundException;
 import com.ch.everyshop.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,11 +34,12 @@ public class QuestionService {
         }
     }
 
-    public void createQuestion (String subject, String content) {
+    public void createQuestion (String subject, String content, SiteUser siteUser) {
         Question q = new Question();
         q.setSubject(subject);
         q.setContent(content);
         q.setCreateDate(LocalDateTime.now());
+        q.setAuthor(siteUser);
         questionRepository.save(q);
     }
 
