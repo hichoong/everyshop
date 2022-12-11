@@ -1,9 +1,7 @@
 package com.ch.everyshop.controller;
 
-import com.ch.everyshop.domain.AnswerForm;
-import com.ch.everyshop.domain.Question;
-import com.ch.everyshop.domain.QuestionForm;
-import com.ch.everyshop.domain.SiteUser;
+import com.ch.everyshop.domain.*;
+import com.ch.everyshop.service.AnswerService;
 import com.ch.everyshop.service.QuestionService;
 import com.ch.everyshop.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +16,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 
 
 @Controller
@@ -28,6 +25,8 @@ public class QuestionController {
 
     private final QuestionService questionService;
     private final UserService userService;
+    private final AnswerService answerService;
+
 
     @RequestMapping("/list")
     public String list(Model model, @RequestParam(value="page", defaultValue="0") int page,
@@ -39,9 +38,11 @@ public class QuestionController {
     }
 
     @GetMapping(value = "/detail/{id}")
-    public String showQuestionDetail(Model model, @PathVariable("id") Long id, AnswerForm answerForm) {
+    public String showQuestionDetail(Model model, @PathVariable("id") Long id, AnswerForm answerForm, @RequestParam(value = "page", defaultValue = "0") int page) {
         Question question = questionService.getQuestion(id);
+        Page<Answer> paging = answerService.getList(question, page);
         model.addAttribute("question", question);
+        model.addAttribute("paging", paging);
         return "question_detail";
     }
 
